@@ -15,9 +15,10 @@ class Item{
      
 @Component({
     selector: 'hostel-app',
-    templateUrl: './templates/app.component.html',
+    templateUrl: './templates/occupancys.html',
     // styleUrls: ['./templates/app.component.css']    
 })
+
 export class AppComponent { 
     items: Item[] = 
     [
