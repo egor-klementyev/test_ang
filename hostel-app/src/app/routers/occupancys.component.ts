@@ -2,15 +2,15 @@ import { Component} from '@angular/core';
   
 @Component({
     selector: 'occupancys-app',
-    template: 
-    `     <div class="page-header">
+    template: `
+    <div class="page-header">
         <h1> Информация о заселенцах </h1>
     </div>
     <div class="panel">
         <div class="form-inline">
             <div class="form-group">
                 <div class="col-md-6">
-                    <input type="number" class="form-control" placeholder="Поиск..." />
+                   <input class="form-control" placeholder = "Поиск..." />
                 </div>
             </div>
             <div class="form-group">
@@ -38,6 +38,7 @@ import { Component} from '@angular/core';
                     <td>(Дата выселения)</td>
                     <td><input type="checkbox" /></td>
                     <td><input type="checkbox" /></td>
+                    <td><button>save</button></td>
                 </tr>
             </tbody>
         </table>
