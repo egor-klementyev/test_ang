@@ -15,8 +15,19 @@ class Item{
      
 @Component({
     selector: 'hostel-app',
-    templateUrl: './templates/occupancys.html',
-    // styleUrls: ['./templates/app.component.css']    
+    styles:  [` 
+                    .active {color:red;}
+                `],
+    template: `
+    <div>
+        <nav>
+            <a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Заселение</a>
+            <a routerLink="/clients" routerLinkActive="active">О клиентах</a>
+            <a routerLink="/nomers" routerLinkActive="active">О номерах</a>
+            <a routerLink="/categorys" routerLinkActive="active">О категориях</a>
+        </nav>
+        <router-outlet></router-outlet>
+    </div>`
 })
 
 export class AppComponent { 

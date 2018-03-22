@@ -11,6 +11,9 @@ module.exports = {
        publicPath: '/public/',
        filename: "[name].js"       // название создаваемого файла
    },
+   devServer: {
+     historyApiFallback: true,
+   },
    resolve: {
     extensions: ['.ts', '.js']
   },
@@ -25,14 +28,7 @@ module.exports = {
                   } ,
                    'angular2-template-loader'
                ]
-            },{
-              test: /\.html$/,
-              loader: 'html-loader'
-            }, {
-                test: /\.css$/,
-                include: path.resolve(__dirname,'src/app'),
-                loader: 'raw-loader'
-              }
+            }
        ]
    },
    plugins: [
