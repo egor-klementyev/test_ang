@@ -4,7 +4,8 @@
     "description": "Angular Project",
     "author": "Georges Klementyev",
     "scripts": {
-        "dev": "webpack-dev-server --hot --open",
+        "dev": "webpack-dev-server --hot --port 7256 --open ",
+        "start":"ng serve ",
         "build": "webpack"
     },
     "dependencies": {

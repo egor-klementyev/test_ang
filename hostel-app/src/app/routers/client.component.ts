@@ -1,5 +1,7 @@
-import { Component} from '@angular/core';
-  
+import { Component, OnInit} from '@angular/core';
+import { HttpService} from '../http.service';
+import {Clients} from '../classes/clients';
+
 @Component({
     selector: 'client-app',
     template:`
@@ -32,18 +34,33 @@ import { Component} from '@angular/core';
                 </tr>
             </thead>
             <tbody>
-                <tr >
-                   <td>Фамилия</td>
-                   <td>Имя</td>
-                   <td>Отчество</td>
-                   <td>Паспортные данные</td>
-                   <td>Цель приезда</td>
+                <tr *ngFor="let client of clients">
+                   <td>{{client?.lastName}}</td>
+                   <td>{{client?.firstName}}</td>
+                   <td>{{client?.threeName}}</td>
+                   <td>{{client?.passData}}</td>
+                   <td>{{client?.reasonComming}}</td>
                    <td><input type="checkbox" /></td>
                    <td><input type="checkbox" /></td>
                    <td><button>save</button></td>
                 </tr>
             </tbody>
         </table>
-    </div>`
+    </div>`,
+    providers: [HttpService]
 })
-export class ClientComponent { }
+
+export class ClientComponent implements OnInit{ 
+  clients:Clients[]=[];
+  // public data:Clients[]=[];
+  error: any;
+
+  constructor(private httpService: HttpService){}
+
+    ngOnInit(){
+        console.log("=====> начало загрузки данных клиента");
+        this.httpService.getDataClient().subscribe( (data:Clients[]) => this.clients = data, error => {this.error = error.message; console.log(error)} );
+        console.log(this.clients);
+        console.log("=====> конец загрузки данных клиента");
+    }
+}

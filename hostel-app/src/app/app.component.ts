@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 //Импорт http сервиса
 import { HttpService} from './http.service';
 //Импорт классов для бд
@@ -26,5 +26,9 @@ import {Categorys} from './classes/categorys';
 })
 
 export class AppComponent { 
+    
+    // category:Categorys [] = [];;
+    // nomer:Nomers [] = [];;
+    // occup:Occupancys [] = [];;
 
 }

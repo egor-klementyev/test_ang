@@ -1,4 +1,7 @@
-import { Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {HttpService} from '../http.service';
+import {Nomers} from '../classes/nomers';
+// import {Categorys} from '../classes/categorys';
   
 @Component({
     selector: 'nomer-app',
@@ -30,16 +33,25 @@ import { Component} from '@angular/core';
                 </tr>
             </thead>
             <tbody>
-                <tr >
-                   <td>Номер</td>
-                   <td>Категория</td>
-                   <td>Кол-во мест</td>
-                   <td><input type="checkbox" /></td>
-                   <td><input type="checkbox" /></td>
-                   <td><button>save</button></td>
+                <tr *ngFor="let nomer of nomers">
+                   <td>{{nomer?.indNomer}}</td>
+                   <td>{{nomer?.categoryID?.name}}</td>
+                   <td>{{nomer?.lengthNomer}}<td><button>save</button></td>
                 </tr>
             </tbody>
         </table>
-    </div>`
+    </div>`,
+    providers: [HttpService]
 })
-export class NomerComponent { }
+export class NomerComponent  implements OnInit{ 
+  nomers:Nomers[]=[];
+  error: any;
+
+  constructor(private httpService: HttpService){}
+
+    ngOnInit(){
+        console.log("=====> начало загрузки данных о номерах");
+        this.httpService.getDataNomer().subscribe( (data:Nomers[]) => {this.nomers=data; console.log("Nomers: ",this.nomers)}, error => {this.error = error.message;} );
+        console.log("=====> конец загрузки данных о номерах");
+    }
+}

@@ -1,8 +1,10 @@
 
-import { NgModule }      from '@angular/core';
+import { NgModule, LOCALE_ID}      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
  
 import {Routes, RouterModule} from '@angular/router';
+
+import {HttpClientModule} from '@angular/common/http';
  
 import { AppComponent }   from './app.component';
 import { OccupancysComponent }   from './routers/occupancys.component';
@@ -25,7 +27,7 @@ const appRoutes: Routes =[
 ];
 
 @NgModule({
-    imports:      [ BrowserModule, RouterModule.forRoot(appRoutes)],
+    imports:      [ BrowserModule, RouterModule.forRoot(appRoutes), HttpClientModule],
     declarations: [ AppComponent, OccupancysComponent, ClientComponent, NomerComponent, CategoryComponent],
     bootstrap:    [ AppComponent ]
 })

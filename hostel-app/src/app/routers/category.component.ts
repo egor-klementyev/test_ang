@@ -1,5 +1,7 @@
-import { Component} from '@angular/core';
-  
+import {Component, OnInit} from '@angular/core';
+import {HttpService} from '../http.service';
+import {Categorys} from '../classes/categorys';
+
 @Component({
     selector: 'category-app',
     template:`
@@ -31,16 +33,32 @@ import { Component} from '@angular/core';
                 </tr>
             </thead>
             <tbody>
-                <tr >
-                   <td>Вид категории</td>
-                   <td>Цена</td>
-                   <td>Удобства</td>
+                <tr *ngFor="let category of categorys">
+                   <td>{{category?.name}}</td>
+                   <td>{{(category?.price/100)}} RUB</td>
+                   <td>{{category?.convenView}}</td>
                    <td><input type="checkbox" /></td>
                    <td><input type="checkbox" /></td>
                    <td><button>save</button></td>
                 </tr>
             </tbody>
         </table>
-    </div>`
+    </div>`,
+    providers:[HttpService]
 })
-export class CategoryComponent { }
+export class CategoryComponent implements OnInit{ 
+  categorys:Categorys[]=[];
+  error: any;
+
+  returnPriceRub(price:number):number{
+    return price / 100;
+  }
+
+  constructor(private httpService: HttpService){}
+
+    ngOnInit(){
+        console.log("=====> начало загрузки данных");
+        this.httpService.getDataCategory().subscribe( (data:Categorys[]) => this.categorys = data, error => {this.error = error.message; console.log(error)} );
+        console.log("=====> конец загрузки данных");
+    }
+}

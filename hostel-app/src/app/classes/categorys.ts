@@ -3,5 +3,5 @@ export class Categorys{
 	name: string;
 	convenView:string;
 	price:number;
-	flg:boolean = false;
+	flgDelete:boolean = false;
 }

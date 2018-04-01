@@ -7,4 +7,5 @@ export class Occupancys{
 	nomer: Nomers;
 	dataOccup:Date;
 	dataExpul:Date;
+	flgDelete:boolean=false;
 }

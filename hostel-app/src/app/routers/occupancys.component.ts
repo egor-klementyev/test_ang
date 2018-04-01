@@ -1,5 +1,10 @@
-import { Component} from '@angular/core';
-  
+import {Component, OnInit} from '@angular/core';
+import {HttpService} from '../http.service';
+import {Occupancys} from '../classes/occupancys';
+import {Nomers} from '../classes/nomers';
+import {Categorys} from '../classes/categorys';
+import {Clients} from '../classes/clients';
+
 @Component({
     selector: 'occupancys-app',
     template: `
@@ -31,17 +36,32 @@ import { Component} from '@angular/core';
                 </tr>
             </thead>
             <tbody>
-                <tr >
-                    <td>(ФИО)</td>
-                    <td>(НОМЕР)</td>
-                    <td>(Дата заселения)</td>
-                    <td>(Дата выселения)</td>
+                <tr *ngFor="let occup of occups">
+                    <td>{{occup?.clientID?.lastName}} {{occup?.clientID?.firstName}} {{occup?.clientID?.threeName}}</td>
+                    <td>{{occup?.nomerID?.indNomer}}</td>
+                    <td>{{occup?.dataOccup | date:"dd/MM/yyyy"}}</td>
+                    <td>{{occup?.dataExpulsion | date:"dd/MM/yyyy"}}</td>
                     <td><input type="checkbox" /></td>
                     <td><input type="checkbox" /></td>
                     <td><button>save</button></td>
                 </tr>
             </tbody>
         </table>
-    </div>`
+    </div>`,
+    providers:[HttpService]
 })
-export class OccupancysComponent { }
+export class OccupancysComponent implements OnInit{ 
+  occups:Occupancys[]=[];
+  // nomer:Nomers[]=[];
+  // category:Categorys[]=[];
+  // client:Clients[]=[];
+  error: any;
+
+  constructor(private httpService: HttpService){}
+
+    ngOnInit(){
+        console.log("=====> начало загрузки данных");
+        this.httpService.getDataOccup().subscribe( (data:Occupancys[]) => {this.occups = data; console.log(this.occups)}, error => {this.error = error.message; console.log(error)} );
+        console.log("=====> конец загрузки данных");
+    }
+}
