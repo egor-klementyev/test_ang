@@ -50,12 +50,12 @@ export class HttpService{
   }
 
   postCreateNomer(nomers:Nomers){
-    const body = {nomer:nomers.nomerNumb, /*category:nomers.category,*/ length:nomers.length, flgDlt:nomers.flgDelete};
+    const body = {nomer:nomers.idNomer,category:nomers.categoryID, length:nomers.lengthNomer, flgDlt:nomers.flgDelete};
     return  this.http.post('http://localhost:8382/app/nomer/ins', body);
   }
 
   postCreateOccup(occup:Occupancys ){
-    const body = {client:occup.client, nomer:occup.nomer, dataOccup:occup.dataOccup, dataExpul:occup.dataExpul, flgDlt:occup.flgDelete};
+    const body = {client:occup.clientID, nomer:occup.nomerID, dataOccup:occup.dateOccup, dataExpul:occup.dataExpulsion, flgDlt:occup.flgDelete};
     return  this.http.post('http://localhost:8382/app/nomer/ins', body);
   }
 

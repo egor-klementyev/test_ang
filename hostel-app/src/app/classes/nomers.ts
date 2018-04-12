@@ -1,9 +1,9 @@
 import {Categorys} from './categorys';
 
 export class Nomers{
-  id:number;
-  nomerNumb:string;
-  length:number;
-  category: Categorys;
+  idNomer:number;
+  indNomer:string;
+  lengthNomer:number;
+  categoryID: Categorys;
   flgDelete:boolean;
 }

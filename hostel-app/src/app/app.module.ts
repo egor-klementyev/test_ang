@@ -1,6 +1,7 @@
 
 import { NgModule, LOCALE_ID}      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule }   from '@angular/forms';
  
 import {Routes, RouterModule} from '@angular/router';
 
@@ -27,7 +28,7 @@ const appRoutes: Routes =[
 ];
 
 @NgModule({
-    imports:      [ BrowserModule, RouterModule.forRoot(appRoutes), HttpClientModule],
+    imports:      [ BrowserModule, RouterModule.forRoot(appRoutes), HttpClientModule, FormsModule],
     declarations: [ AppComponent, OccupancysComponent, ClientComponent, NomerComponent, CategoryComponent],
     bootstrap:    [ AppComponent ]
 })

@@ -1,5 +1,5 @@
 export class Clients{
-	id:number;
+	idClient:number;
 	passData:number
 	firstName:string;
 	lastName:string;

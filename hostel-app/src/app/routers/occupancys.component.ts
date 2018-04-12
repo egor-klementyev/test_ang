@@ -60,8 +60,8 @@ export class OccupancysComponent implements OnInit{
   constructor(private httpService: HttpService){}
 
     ngOnInit(){
-        console.log("=====> начало загрузки данных");
+        console.log("=====> начало загрузки данных о заселенцах");
         this.httpService.getDataOccup().subscribe( (data:Occupancys[]) => {this.occups = data; console.log(this.occups)}, error => {this.error = error.message; console.log(error)} );
-        console.log("=====> конец загрузки данных");
+        console.log("=====> конец загрузки данных о заселенцах");
     }
 }

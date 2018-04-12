@@ -21,6 +21,30 @@ import {Categorys} from '../classes/categorys';
                 </div>
             </div>
         </div>
+
+        <div class="form-inline">
+            <div class="form-group">
+                <div class="col-md-8">
+                    <input class="form-control" [(ngModel)]="receivedCategory.name" placeholder = "Название категории" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-6">
+                    <input type="number" class="form-control" [(ngModel)]="receivedCategory.price" placeholder="Цена" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-8">
+                    <input class="form-control" [(ngModel)]="receivedCategory.convenView" placeholder = "Удобства" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-8">
+                    <button class="btn btn-default" (click)="addClient(categoryName, price, convenView)">Добавить</button>
+                </div>
+            </div>
+        </div>
+
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -46,13 +70,12 @@ import {Categorys} from '../classes/categorys';
     </div>`,
     providers:[HttpService]
 })
+
 export class CategoryComponent implements OnInit{ 
   categorys:Categorys[]=[];
+  receivedCategory:Categorys;
+  done: boolean = false;
   error: any;
-
-  returnPriceRub(price:number):number{
-    return price / 100;
-  }
 
   constructor(private httpService: HttpService){}
 
@@ -61,4 +84,18 @@ export class CategoryComponent implements OnInit{
         this.httpService.getDataCategory().subscribe( (data:Categorys[]) => this.categorys = data, error => {this.error = error.message; console.log(error)} );
         console.log("=====> конец загрузки данных");
     }
+
+  addClient(newCategory:Categorys){
+    if (newCategory.name == null || newCategory.name == undefined || newCategory.name.trim() == "")
+      return;
+    if (newCategory.price == null || newCategory.price == undefined)
+      return;
+    if(newCategory.convenView == null || newCategory.convenView == undefined || newCategory.convenView.trim() == "")
+      return;
+    this.httpService.postCreateCategory(newCategory).subscribe(
+                    (data: Categorys) => {this.receivedCategory=data; this.done=true;},
+                    error => console.log(error)
+    );
+  }
+
 }
